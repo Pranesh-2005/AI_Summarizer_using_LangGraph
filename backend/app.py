@@ -19,7 +19,7 @@ graph = build_graph()
 @app.get("/research")
 async def research(topic: str):
     try:
-        result = graph.run({"topic": topic})
+        result = graph.invoke({"topic": topic})
         return {
             "topic": topic,
             "summary": result["summary"]
