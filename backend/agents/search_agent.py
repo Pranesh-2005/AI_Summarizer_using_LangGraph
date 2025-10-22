@@ -1,4 +1,4 @@
-from langchain.tools.tavily_search import TavilySearchResults
+from langchain_community.tools.tavily_search.tool import TavilySearchResults
 
 def search_topic(query: str):
     """Search the web for relevant info"""
