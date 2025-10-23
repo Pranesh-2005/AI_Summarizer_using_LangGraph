@@ -18,18 +18,30 @@ async function getResearch() {
     
     loading.classList.add('hidden');
     resultBox.classList.remove('hidden');
-
+    
     if (data.summary) {
-      // Parse Markdown to HTML using marked.js
-      const markdownHtml = marked.parse(data.summary);
-      resultBox.innerHTML = `<h2>${data.topic}</h2><div class="markdown-content">${markdownHtml}</div>`;
+      // Parse Markdown to HTML using marked.js with proper configuration
+      const markdownHtml = marked.parse(data.summary, {
+        breaks: true,
+        gfm: true,
+        sanitize: false
+      });
+      resultBox.innerHTML = `
+        <div class="research-result">
+          <h2 class="topic-title">📋 ${data.topic}</h2>
+          <div class="markdown-content">${markdownHtml}</div>
+        </div>
+      `;
+    } else if (data.error) {
+      resultBox.innerHTML = `<p style="color:red;">❌ ${data.error}</p>`;
     } else {
-      resultBox.innerHTML = `<p style="color:red;">${data.error || 'Failed to get summary.'}</p>`;
+      resultBox.innerHTML = `<p style="color:red;">❌ Failed to get summary.</p>`;
     }
   } catch (err) {
     loading.classList.add('hidden');
     resultBox.classList.remove('hidden');
-    resultBox.innerHTML = `<p style="color:red;">Error connecting to API.</p>`;
+    resultBox.innerHTML = `<p style="color:red;">❌ Error connecting to API: ${err.message}</p>`;
+    console.error('API Error:', err);
   }
 }
 
