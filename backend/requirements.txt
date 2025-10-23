@@ -2,6 +2,7 @@ fastapi
 uvicorn
 langgraph
 langchain
+langchain-community
 tavily-python
 httpx
 python-dotenv
