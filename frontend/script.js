@@ -20,7 +20,9 @@ async function getResearch() {
     resultBox.classList.remove('hidden');
 
     if (data.summary) {
-      resultBox.innerHTML = `<h2>${data.topic}</h2><p>${data.summary}</p>`;
+      // Parse Markdown to HTML using marked.js
+      const markdownHtml = marked.parse(data.summary);
+      resultBox.innerHTML = `<h2>${data.topic}</h2><div class="markdown-content">${markdownHtml}</div>`;
     } else {
       resultBox.innerHTML = `<p style="color:red;">${data.error || 'Failed to get summary.'}</p>`;
     }
@@ -30,3 +32,10 @@ async function getResearch() {
     resultBox.innerHTML = `<p style="color:red;">Error connecting to API.</p>`;
   }
 }
+
+// Allow Enter key to trigger research
+document.getElementById('topicInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    getResearch();
+  }
+});
