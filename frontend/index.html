@@ -8,17 +8,49 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
+  <div class="background-gradient"></div>
+  
   <div class="container">
-    <h1>AI Research Assistant 🔍</h1>
-    <p>Enter a topic to research — powered by LangGraph + OpenRouter</p>
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <span class="logo-icon">🔍</span>
+          <h1>Research Assistant</h1>
+        </div>
+        <p class="subtitle">Powered by LangGraph + OpenRouter</p>
+      </div>
+    </header>
 
-    <div class="input-box">
-      <input type="text" id="topicInput" placeholder="e.g. Quantum Computing in AI">
-      <button onclick="getResearch()">Generate</button>
-    </div>
+    <main class="main-content">
+      <div class="input-section">
+        <div class="input-wrapper">
+          <input 
+            type="text" 
+            id="topicInput" 
+            placeholder="Enter a research topic..." 
+            class="input-field"
+          >
+          <button onclick="getResearch()" class="btn-generate">
+            <span class="btn-text">Generate</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </div>
+        <p class="input-hint">Try: "Quantum Computing in AI", "Neural Networks", "Machine Learning Ethics"</p>
+      </div>
 
-    <div id="loading" class="hidden">⏳ Analyzing and summarizing...</div>
-    <div id="result" class="result-box hidden"></div>
+      <div id="loading" class="loading-state hidden">
+        <div class="spinner"></div>
+        <p class="loading-text">Analyzing and summarizing...</p>
+      </div>
+
+      <div id="result" class="result-box hidden">
+        <div class="result-header">
+          <h2>Research Results</h2>
+          <button class="btn-close" onclick="clearResult()">✕</button>
+        </div>
+        <div class="result-content"></div>
+      </div>
+    </main>
   </div>
 
   <script src="script.js"></script>
