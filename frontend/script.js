@@ -14,7 +14,7 @@ async function getResearch() {
   loading.textContent = "⏳ Fetching data..."
 
   try {
-    const res = await fetch(`http://127.0.0.1:8000/research?topic=${encodeURIComponent(topic)}`)
+    const res = await fetch(`https://ai-summarizer-using-langgraph.onrender.com/research?topic=${encodeURIComponent(topic)}`)
     const data = await res.json()
 
     loading.classList.add("hidden")
